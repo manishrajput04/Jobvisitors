@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@keyframes grow {
+    from {
+      transform: scale(0.8);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  .animate-grow {
+    animation: grow 1s ease-out forwards;
+  }
+  

@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import jobs from "./jobsData";
 import { Link } from "react-router-dom";
 
-// Utility to highlight matching text
 function highlightText(text, searchText) {
   if (!searchText) return text;
   const parts = text.split(new RegExp(`(${searchText})`, "gi"));
@@ -20,7 +19,6 @@ const Jobsection = forwardRef(({ searchText, searchClicked }, ref) => {
   const [filter, setFilter] = useState("All");
   const [visibleCount, setVisibleCount] = useState(8);
   const categories = ["All", ...new Set(jobs.map((job) => job.category))];
-
   const [filteredJobs, setFilteredJobs] = useState(jobs);
 
   useEffect(() => {
@@ -56,7 +54,6 @@ const Jobsection = forwardRef(({ searchText, searchClicked }, ref) => {
   }, [filter, searchText, searchClicked]);
 
   const displayedJobs = filteredJobs.slice(0, visibleCount);
-
   const handleViewMore = () => setVisibleCount(prev => prev + 8);
   const handleViewLess = () => setVisibleCount(8);
 
@@ -64,7 +61,6 @@ const Jobsection = forwardRef(({ searchText, searchClicked }, ref) => {
     <div ref={ref} id="jobs" className="bg-orange-200 py-10 px-4">
       <h2 className="text-4xl font-bold text-center text-gray-900 mb-6">Recent Jobs</h2>
 
-      {/* Category Buttons */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
         {categories.map((cat) => (
           <button
@@ -84,21 +80,17 @@ const Jobsection = forwardRef(({ searchText, searchClicked }, ref) => {
         ))}
       </div>
 
-      {/* Jobs Grid */}
       {displayedJobs.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
           <AnimatePresence>
             {displayedJobs.map((job, index) => (
-              <motion.a
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                href={job.applyLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white rounded-lg shadow-md p-4 w-full max-w-xs transition transform hover:scale-105 cursor-pointer"
+                className="bg-white rounded-lg shadow-md p-4 w-full max-w-xs transition transform hover:scale-105"
               >
                 <h3 className="text-lg font-semibold text-gray-900">
                   {highlightText(job.title, searchText)}
@@ -138,9 +130,9 @@ const Jobsection = forwardRef(({ searchText, searchClicked }, ref) => {
                     ))}
                   </ul>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-sm border px-3 py-1 rounded-md bg-white text-gray-700">
-                    More Details
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-500">
+                    🕒 {job.postedDate || "Not specified"}
                   </span>
                   <Link 
                     to={`/jobs/${job.title.replace(/\s+/g, "-").toLowerCase()}`}
@@ -149,7 +141,7 @@ const Jobsection = forwardRef(({ searchText, searchClicked }, ref) => {
                     Apply Now
                   </Link>
                 </div>
-              </motion.a>
+              </motion.div>
             ))}
           </AnimatePresence>
         </div>
@@ -171,7 +163,6 @@ const Jobsection = forwardRef(({ searchText, searchClicked }, ref) => {
         </motion.div>
       )}
 
-      {/* View More / Less */}
       {filteredJobs.length > 8 && (
         <div className="mt-8 text-center">
           {visibleCount < filteredJobs.length ? (

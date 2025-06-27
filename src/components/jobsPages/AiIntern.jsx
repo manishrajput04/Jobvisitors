@@ -105,18 +105,24 @@ export default function PayoneerJobDescription() {
         transition={{ duration: 0.4 }}
         className="space-y-4 text-center"
       >
+        <a
+         href="https://example.com/apply"
+         target="_blank"
+         rel="noopener noreferrer"
+      >
         <button className="bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700 transition-transform duration-300 transform hover:scale-105">
-          Apply
+         Apply
         </button>
+       </a>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
           <a
-            href="#"
+            href="https://telegram.me/jobvisitors"
             className="bg-orange-100 text-orange-800 font-medium px-5 py-2 rounded hover:bg-orange-200 transition-all duration-300"
           >
             Join our Telegram Channel
           </a>
           <a
-            href="#"
+            href="https://whatsapp.com/channel/0029VanAsCCDTkK1dMON290y"
             className="bg-orange-100 text-orange-800 font-medium px-5 py-2 rounded hover:bg-orange-200 transition-all duration-300"
           >
             Join our Whatsapp Group
